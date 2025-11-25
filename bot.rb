@@ -23,17 +23,24 @@ xml = Net::HTTP.get(URI(FEED_URL))
 doc = Nokogiri::XML(xml)
 items = doc.xpath("//item")
 
+MAX_PER_RUN = 5
+count = 0
+
 items.each do |item|
+  break if count >= MAX_PER_RUN
+
   guid = item.at_xpath("guid")&.text || item.at_xpath("link")&.text
   title = item.at_xpath("title")&.text
   link = item.at_xpath("link")&.text
-
   next if guid.nil? || seen.include?(guid)
 
   client.post("tweets", { text: "#{title}\n#{link}" }.to_json)
-  puts "Tweeted: #{title} — #{link}"
+  puts "Tweeted: #{title}"
 
   seen << guid
+  count += 1
+
+  sleep rand(2..5) # avoid 429
 end
 
 File.write(STATE_FILE, JSON.pretty_generate(seen))
