@@ -5,6 +5,7 @@ GEM
       public_suffix (>= 2.0.2, < 8.0)
     buftok (0.2.0)
     domain_name (0.6.20240107)
+    dotenv (3.1.8)
     equalizer (0.0.11)
     ffi (1.17.2-arm64-darwin)
     ffi-compiler (1.3.2)
@@ -46,14 +47,17 @@ GEM
       multipart-post (~> 2.0)
       naught (~> 1.0)
       simple_oauth (~> 0.3.0)
+    x (0.14.1)
 
 PLATFORMS
   arm64-darwin-21
 
 DEPENDENCIES
+  dotenv
   nokogiri
   rss
   twitter (~> 7.0)
+  x (~> 0.14.1)
 
 BUNDLED WITH
    2.3.25
