@@ -1,4 +1,5 @@
 source "https://rubygems.org"
+ruby "3.4.4"
 
 gem "rss"
 gem "nokogiri"
